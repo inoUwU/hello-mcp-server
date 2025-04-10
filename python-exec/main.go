@@ -1,14 +1,8 @@
 package main
 
 import (
-	"context"
 	"flag"
-	"fmt"
 	"log"
-	"os"
-	"os/exec"
-	"path"
-	"strings"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -49,7 +43,7 @@ func main() {
 	// Run server in appropriate mode
 	if *sseMode {
 		// Create and start SSE server
-		sseServer := server.NewSSEServer(mcpServer, "http://localhost:8080")
+		sseServer := server.NewSSEServer(mcpServer, server.WithBaseURL("http://localhost:8080"))
 		log.Printf("Starting SSE server on localhost:8080")
 		if err := sseServer.Start(":8080"); err != nil {
 			log.Fatalf("Server error: %v", err)
